@@ -1,7 +1,7 @@
 {
   "mappings": [
-    "/content/aem-block-collection/:/",
-    "/content/aem-block-collection/metadata:/metadata.json",
-    "/content/aem-block-collection/configuration:/.helix/config.json"
+    "/content/cooley-ue-ema2/:/",
+    "/content/cooley-ue-ema2/metadata:/metadata.json",
+    "/content/cooley-ue-ema2/configuration:/.helix/config.json"
   ]
 }

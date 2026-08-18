@@ -35,8 +35,6 @@ export default function parse(element, { document }) {
 
   // --- Text (field:text): the hero title/headline ---
   const heading = element.querySelector('h1.title, h1, .inner h1, [class*="title"] , h2');
-  // Optional CTA / control button (e.g. "Pause video")
-  const cta = element.querySelector('button.js-video-toggle, .btn--video-toggle, a.btn, .inner a');
 
   // Empty-block guard
   if (!heading && !picture && !img && tileImgs.length === 0) {
@@ -46,15 +44,18 @@ export default function parse(element, { document }) {
 
   const cells = [];
 
-  // Row: images (all scattered tiles; fall back to a single picture/img)
+  // Row: images (all scattered tiles; fall back to a single picture/img).
+  // All tiles go in ONE paragraph — md2jcr maps a single field to one cell and
+  // cannot handle multiple block-level paragraphs in the same cell.
   if (tileImgs.length > 0) {
     const imageFrag = document.createDocumentFragment();
     imageFrag.appendChild(document.createComment(' field:image '));
-    tileImgs.forEach((im) => {
-      const p = document.createElement('p');
+    const p = document.createElement('p');
+    tileImgs.forEach((im, i) => {
+      if (i > 0) p.appendChild(document.createTextNode(' '));
       p.appendChild(im);
-      imageFrag.appendChild(p);
     });
+    imageFrag.appendChild(p);
     cells.push([imageFrag]);
   } else if (picture || img) {
     const imageFrag = document.createDocumentFragment();
@@ -71,22 +72,6 @@ export default function parse(element, { document }) {
     const h = document.createElement('h1');
     h.textContent = heading.textContent.replace(/\s+/g, ' ').trim();
     textFrag.appendChild(h);
-    // Optional CTA / control text goes in the same richtext cell.
-    if (cta) {
-      const ctaText = cta.textContent.replace(/\s+/g, ' ').trim();
-      if (ctaText) {
-        const p = document.createElement('p');
-        if (cta.tagName === 'A' && cta.getAttribute('href')) {
-          const a = document.createElement('a');
-          a.setAttribute('href', cta.getAttribute('href'));
-          a.textContent = ctaText;
-          p.appendChild(a);
-        } else {
-          p.textContent = ctaText;
-        }
-        textFrag.appendChild(p);
-      }
-    }
     cells.push([textFrag]);
   }
 

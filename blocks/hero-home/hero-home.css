@@ -45,10 +45,18 @@
   margin: 0;
 }
 
+/* all 5 tiles live in one <p>; the paragraph is a full-canvas positioning
+   context and each img is scattered individually */
 .hero-home.block > div:nth-child(1) p {
   position: absolute;
-  width: 96px;
+  inset: 0;
   margin: 0;
+}
+
+.hero-home.block > div:nth-child(1) picture {
+  position: absolute;
+  display: block;
+  width: 96px;
 }
 
 .hero-home.block > div:nth-child(1) img {
@@ -75,23 +83,23 @@
 
 /* scattered constellation — mobile (smaller, kept near edges).
    inset order: top right bottom left */
-.hero-home.block > div:nth-child(1) p:nth-of-type(1) {
+.hero-home.block > div:nth-child(1) picture:nth-of-type(1) {
   inset: 6% auto auto 2%;
 }
 
-.hero-home.block > div:nth-child(1) p:nth-of-type(2) {
+.hero-home.block > div:nth-child(1) picture:nth-of-type(2) {
   inset: 4% 4% auto auto;
 }
 
-.hero-home.block > div:nth-child(1) p:nth-of-type(3) {
+.hero-home.block > div:nth-child(1) picture:nth-of-type(3) {
   inset: 42% 2% auto auto;
 }
 
-.hero-home.block > div:nth-child(1) p:nth-of-type(4) {
+.hero-home.block > div:nth-child(1) picture:nth-of-type(4) {
   inset: auto auto 14% 4%;
 }
 
-.hero-home.block > div:nth-child(1) p:nth-of-type(5) {
+.hero-home.block > div:nth-child(1) picture:nth-of-type(5) {
   inset: auto 6% 6% auto;
 }
 
@@ -124,28 +132,28 @@
 
   /* desktop scatter — larger tiles in the source constellation.
      inset order: top right bottom left */
-  .hero-home.block > div:nth-child(1) p {
+  .hero-home.block > div:nth-child(1) picture {
     width: 180px;
   }
 
-  .hero-home.block > div:nth-child(1) p:nth-of-type(1) {
+  .hero-home.block > div:nth-child(1) picture:nth-of-type(1) {
     inset: 14% auto auto 3%;
   }
 
-  .hero-home.block > div:nth-child(1) p:nth-of-type(2) {
+  .hero-home.block > div:nth-child(1) picture:nth-of-type(2) {
     inset: 6% 16% auto auto;
     width: 150px;
   }
 
-  .hero-home.block > div:nth-child(1) p:nth-of-type(3) {
+  .hero-home.block > div:nth-child(1) picture:nth-of-type(3) {
     inset: 46% 4% auto auto;
   }
 
-  .hero-home.block > div:nth-child(1) p:nth-of-type(4) {
+  .hero-home.block > div:nth-child(1) picture:nth-of-type(4) {
     inset: auto auto 16% 26%;
   }
 
-  .hero-home.block > div:nth-child(1) p:nth-of-type(5) {
+  .hero-home.block > div:nth-child(1) picture:nth-of-type(5) {
     inset: auto 10% 4% auto;
   }
 }

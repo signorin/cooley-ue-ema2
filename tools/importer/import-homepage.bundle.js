@@ -63,7 +63,6 @@ var CustomImportScript = (() => {
     const picture = element.querySelector(".slots picture, picture");
     const img = element.querySelector(".slots img, img");
     const heading = element.querySelector('h1.title, h1, .inner h1, [class*="title"] , h2');
-    const cta = element.querySelector("button.js-video-toggle, .btn--video-toggle, a.btn, .inner a");
     if (!heading && !picture && !img && tileImgs.length === 0) {
       element.replaceWith(...element.childNodes);
       return;
@@ -72,11 +71,12 @@ var CustomImportScript = (() => {
     if (tileImgs.length > 0) {
       const imageFrag = document2.createDocumentFragment();
       imageFrag.appendChild(document2.createComment(" field:image "));
-      tileImgs.forEach((im) => {
-        const p = document2.createElement("p");
+      const p = document2.createElement("p");
+      tileImgs.forEach((im, i) => {
+        if (i > 0) p.appendChild(document2.createTextNode(" "));
         p.appendChild(im);
-        imageFrag.appendChild(p);
       });
+      imageFrag.appendChild(p);
       cells.push([imageFrag]);
     } else if (picture || img) {
       const imageFrag = document2.createDocumentFragment();
@@ -90,21 +90,6 @@ var CustomImportScript = (() => {
       const h = document2.createElement("h1");
       h.textContent = heading.textContent.replace(/\s+/g, " ").trim();
       textFrag.appendChild(h);
-      if (cta) {
-        const ctaText = cta.textContent.replace(/\s+/g, " ").trim();
-        if (ctaText) {
-          const p = document2.createElement("p");
-          if (cta.tagName === "A" && cta.getAttribute("href")) {
-            const a = document2.createElement("a");
-            a.setAttribute("href", cta.getAttribute("href"));
-            a.textContent = ctaText;
-            p.appendChild(a);
-          } else {
-            p.textContent = ctaText;
-          }
-          textFrag.appendChild(p);
-        }
-      }
       cells.push([textFrag]);
     }
     const block = WebImporter.Blocks.createBlock(document2, { name: "hero-home", cells });

@@ -1,0 +1,131 @@
+/* Block: cards-insights -- "Latest insights" vertical list on dark maroon.
+   Values extracted from cooley.com computed styles.
+   Everything renders in Cooley red (#fd1434) on the maroon background,
+   so we must override the global .section.dark white-text rules. */
+
+.cards-insights > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-insights > ul > li {
+  background-color: transparent;
+  border-top: 1px solid rgb(253 20 52 / 45%);
+  padding: 24px 0;
+}
+
+.cards-insights > ul > li:last-child {
+  border-bottom: 1px solid rgb(253 20 52 / 45%);
+}
+
+/* hide the empty image cell (may be labelled card-image or, when empty, card-body) */
+.cards-insights .cards-insights-card-image,
+.cards-insights .cards-insights-card-body:not(:has(h3)) {
+  display: none;
+}
+
+/* card body holds the title, meta and (via ::after) the arrow */
+.cards-insights .cards-insights-card-body:has(h3) {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 52px;
+  gap: 8px 16px;
+  align-items: center;
+}
+
+/* title */
+.cards-insights .cards-insights-card-body h3 {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  font-family: var(--heading-font-family-regular);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.28px;
+}
+
+.cards-insights .cards-insights-card-body h3 a {
+  color: var(--cooley-red);
+  text-decoration: none;
+}
+
+.cards-insights .cards-insights-card-body h3 a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* override global .section.dark white-link rule */
+main .section.dark .cards-insights .cards-insights-card-body h3 a:any-link {
+  color: var(--cooley-red);
+  text-decoration: none;
+}
+
+main .section.dark .cards-insights .cards-insights-card-body h3 a:hover {
+  color: #fff;
+}
+
+/* meta line (category + date) */
+.cards-insights .cards-insights-card-body p {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  color: var(--cooley-red);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0.48px;
+}
+
+/* right-pointing arrow */
+.cards-insights .cards-insights-card-body:has(h3)::after {
+  content: "";
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  place-self: center end;
+  width: 52px;
+  height: 26px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="52" height="26" viewBox="0 0 52 26" fill="none" stroke="%23fd1434" stroke-width="2"><line x1="0" y1="13" x2="50" y2="13"/><polyline points="39,3 50,13 39,23" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center right;
+  transition: transform 0.2s ease;
+}
+
+.cards-insights .cards-insights-card-body:hover::after {
+  transform: translateX(6px);
+}
+
+@media (width >= 900px) {
+  .cards-insights > ul > li {
+    padding: 32px 0;
+  }
+
+  .cards-insights .cards-insights-card-body:has(h3) {
+    grid-template-columns: 1fr auto 52px;
+    gap: 0 64px;
+  }
+
+  .cards-insights .cards-insights-card-body h3 {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 36px;
+    line-height: 39.6px;
+    letter-spacing: -0.36px;
+  }
+
+  .cards-insights .cards-insights-card-body p {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    white-space: nowrap;
+  }
+
+  .cards-insights .cards-insights-card-body:has(h3)::after {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}

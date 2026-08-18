@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "projectType": "xwalk"
+  },
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.cooley.com/"
+      ],
+      "coverageGaps": [],
+      "description": "Cooley.com homepage with full-width hero (video), firm news teaser carousel, resource three-up cards, condensed featured media, full-width video, and tabbed practice link list",
+      "blocks": [
+        {
+          "name": "hero-home",
+          "instances": [
+            "#main > article.grid-container > header.hero-home"
+          ]
+        },
+        {
+          "name": "cards-news",
+          "instances": [
+            "#main article.firm-news-teaser-list .items.swiper-wrapper",
+            "#main article.firm-news-teaser-list .items"
+          ]
+        },
+        {
+          "name": "cards-resource",
+          "instances": [
+            "#main article.resource-threeup-cards ul.items"
+          ]
+        },
+        {
+          "name": "cards-insights",
+          "instances": [
+            "#main article.condensed-featured-media ul.items"
+          ]
+        },
+        {
+          "name": "video-fullwidth",
+          "instances": [
+            "#main > article.grid-container > article.video-full-width"
+          ]
+        },
+        {
+          "name": "tabs-links",
+          "instances": [
+            "#main article.tabbed-link-list .tablist-items"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1-hero",
+          "name": "Hero",
+          "selector": "#main > article.grid-container > header.hero-home.js-hero-home",
+          "style": null,
+          "blocks": [
+            "hero-home"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2-firm-news",
+          "name": "Firm News",
+          "selector": "#main > article.grid-container > article.firm-news-teaser-list",
+          "style": null,
+          "blocks": [
+            "cards-news"
+          ],
+          "defaultContent": [
+            "#main article.firm-news-teaser-list header.intro"
+          ]
+        },
+        {
+          "id": "section-3-resources",
+          "name": "Resources",
+          "selector": "#main > article.grid-container > article.resource-threeup-cards",
+          "style": null,
+          "blocks": [
+            "cards-resource"
+          ],
+          "defaultContent": [
+            "#main article.resource-threeup-cards header.intro"
+          ]
+        },
+        {
+          "id": "section-4-insights",
+          "name": "Latest Insights",
+          "selector": "#main > article.grid-container > article.condensed-featured-media",
+          "style": "dark",
+          "blocks": [
+            "cards-insights"
+          ],
+          "defaultContent": [
+            "#main article.condensed-featured-media header.intro",
+            "#main article.condensed-featured-media .outro"
+          ]
+        },
+        {
+          "id": "section-5-video",
+          "name": "Video",
+          "selector": "#main > article.grid-container > article.video-full-width",
+          "style": null,
+          "blocks": [
+            "video-fullwidth"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-6-key-services",
+          "name": "Key Services",
+          "selector": "#main > article.grid-container > article.tabbed-link-list",
+          "style": "grey",
+          "blocks": [
+            "tabs-links"
+          ],
+          "defaultContent": [
+            "#main article.tabbed-link-list header.intro",
+            "#main article.tabbed-link-list .outro"
+          ]
+        }
+      ]
+    }
+  ]
+}

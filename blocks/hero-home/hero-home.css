@@ -1,0 +1,109 @@
+/* Hero Home — Cooley homepage
+ * Tall white full-width canvas, giant centered red serif headline,
+ * decorative media tile(s) scattered at the edges. Values from source
+ * https://www.cooley.com/ header.hero-home (see migration-work/hero-home-extracted.css)
+ */
+
+/* full-bleed: escape the .section 1520px max-width wrapper */
+.hero-home-container .hero-home-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-home.block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  padding: 48px 24px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+/* ---- row base rules (equal specificity, kept together) ---- */
+
+/* row 1: decorative media tile */
+.hero-home.block > div:nth-child(1) {
+  position: absolute;
+  top: 8%;
+  left: 0;
+  z-index: 1;
+  width: 140px;
+  margin: 0;
+}
+
+/* row 2: headline */
+.hero-home.block > div:nth-child(2) {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+}
+
+/* ---- decorative media tile descendants (row 1: div > div > p > picture > img) ---- */
+.hero-home.block > div:nth-child(1) > div,
+.hero-home.block > div:nth-child(1) p {
+  margin: 0;
+}
+
+.hero-home.block > div:nth-child(1) picture {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.hero-home.block > div:nth-child(1) img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- headline row descendants (row 2: div > div > h1 + p) ---- */
+.hero-home.block > div:nth-child(2) > div {
+  margin: 0 auto;
+}
+
+.hero-home.block h1 {
+  margin: 0;
+  color: var(--cooley-red);
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  font-size: clamp(44px, 12vw, 122.4px);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* "Pause video" — small de-emphasized secondary control */
+.hero-home.block > div:nth-child(2) p {
+  margin: 20px 0 0;
+  color: var(--cooley-red-eyebrow);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-transform: none;
+  cursor: pointer;
+}
+
+/* ---- desktop ---- */
+@media (width >= 900px) {
+  .hero-home.block {
+    min-height: 792px;
+    padding: 0 40px;
+  }
+
+  .hero-home.block > div:nth-child(1) {
+    top: 108px;
+    left: 0;
+    width: 180px;
+  }
+
+  .hero-home.block > div:nth-child(2) p {
+    margin-top: 28px;
+  }
+}

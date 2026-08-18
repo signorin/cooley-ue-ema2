@@ -1,0 +1,16 @@
+{
+  "type": "xwalk",
+  "sites": {
+    "cooley-ue-ema2": {
+      "previewOrg": "signorin",
+      "previewSite": "cooley-ue-ema2",
+      "contentHostUrl": "author-p127374-e1240195.adobeaemcloud.com",
+      "aemSitePath": "/content/cooley-ue-ema2",
+      "aemAssetsFolderPath": "/content/dam/cooley-ue-ema2",
+      "aemSiteName": "cooley-ue-ema2",
+      "aemSiteTitle": "Cooleydemo2",
+      "baseUrl": "https://www.cooley.com/",
+      "libraryUrl": "https://main--sta-xwalk-boilerplate--aemysites.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+/* Block: cards-news — "What Matters" / Firm News teaser row.
+ * Text-only news teasers: red top-dash + serif red title + small meta line.
+ * Values extracted from source computed styles at https://www.cooley.com/ */
+
+.cards-news > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (width >= 600px) {
+  .cards-news > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-news > ul {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px 32px;
+  }
+}
+
+/* Card: no border/background, top-aligned text-only teaser */
+.cards-news > ul > li {
+  border: none;
+  background: none;
+  align-self: start;
+}
+
+.cards-news .cards-news-card-body {
+  margin: 0;
+}
+
+/* Collapse the empty image cell (EDS keeps the authored image cell) */
+.cards-news .cards-news-card-body:empty {
+  display: none;
+}
+
+/* Title — serif, Cooley red, tight leading */
+.cards-news .cards-news-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family-regular);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 39.6px;
+  letter-spacing: -0.36px;
+  color: var(--cooley-red);
+}
+
+/* Red top-dash accent above each title */
+.cards-news .cards-news-card-body h3::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 2px;
+  margin-bottom: 13px;
+  background-color: var(--cooley-red);
+}
+
+.cards-news .cards-news-card-body h3 a:any-link {
+  color: var(--cooley-red);
+  text-decoration: none;
+}
+
+.cards-news .cards-news-card-body h3 a:hover {
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
+
+/* Meta line — small sans, eyebrow red, letter-spaced */
+.cards-news .cards-news-card-body p {
+  margin: 29px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0.48px;
+  color: var(--cooley-red-eyebrow);
+}

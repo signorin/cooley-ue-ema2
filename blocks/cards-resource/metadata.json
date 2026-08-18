@@ -1,0 +1,37 @@
+{
+  "variantName": "cards-resource",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-18T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.cooley.com/",
+    "originPage": "Cooley.com homepage - 'Resources' three-up promotional cards",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "accent",
+    "density": "spacious",
+    "purpose": "promo-resource",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "linked title + description + CTA",
+    "buttonCount": 1,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "three-up promotional resource cards",
+      "colored promo tiles with title, description and CTA"
+    ],
+    "notSuitableFor": [
+      "text-only news teaser lists",
+      "cards that require imagery"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-18T00:00:00.000Z"
+  }
+}

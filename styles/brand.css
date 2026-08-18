@@ -1,0 +1,74 @@
+/*
+ * Cooley brand tokens (extracted from https://www.cooley.com/)
+ * GT Sectra (display serif) + Arial Nova (body sans), Cooley red + dark maroon palette.
+ */
+
+/* Display serif — GT Sectra (Book 300 / Regular 400) */
+@font-face {
+  font-family: GT-Sectra-Book;
+  src: url('../fonts/GT-Sectra-Book.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: GT-Sectra-Regular;
+  src: url('../fonts/GT-Sectra-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body sans — Arial Nova */
+@font-face {
+  font-family: ArialNova;
+  src: url('../fonts/ArialNovaRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ArialNova;
+  src: url('../fonts/ArialNovaLight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: ArialNova;
+  src: url('../fonts/ArialNovaBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* fonts */
+  --heading-font-family: 'GT-Sectra-Book', garamond, 'Times New Roman', serif;
+  --heading-font-family-regular: 'GT-Sectra-Regular', garamond, 'Times New Roman', serif;
+  --body-font-family: 'ArialNova', arial, helvetica, sans-serif;
+
+  /* brand colors */
+  --cooley-red: #fd1434;
+  --cooley-red-eyebrow: #de0220;
+  --cooley-maroon: #33040e;
+  --cooley-maroon-footer: #3a030e;
+  --cooley-pale-pink: #fff2f4;
+  --background-color: #fff;
+  --text-color: #33040e;
+  --link-color: #fd1434;
+  --link-hover-color: #b30022;
+  --light-color: #fff2f4;
+  --dark-color: #33040e;
+
+  /* heading sizes (desktop, from source) */
+  --heading-font-size-xxl: 122px;
+  --heading-font-size-xl: 79px;
+  --heading-font-size-l: 36px;
+  --heading-font-size-m: 28px;
+  --heading-font-size-s: 20px;
+  --heading-font-size-xs: 16px;
+}

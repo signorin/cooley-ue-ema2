@@ -1,0 +1,37 @@
+{
+  "variantName": "cards-news",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-18T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.cooley.com/",
+    "originPage": "Cooley.com homepage - 'What Matters' firm news teaser carousel",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "wide",
+    "purpose": "news-teaser",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "linked title + category label + date",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "news/press teaser lists",
+      "horizontally scrollable text-only teaser rows"
+    ],
+    "notSuitableFor": [
+      "cards that require images",
+      "promotional cards with CTA buttons"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-18T00:00:00.000Z"
+  }
+}

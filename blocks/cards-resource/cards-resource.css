@@ -1,0 +1,125 @@
+/* Block: cards-resource — three promotional resource cards (maroon / red / pale-pink) */
+
+/* Values extracted from cooley.com computed styles. */
+
+.cards-resource > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+/* Card */
+.cards-resource > ul > li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 396px;
+  margin: 0;
+  padding: 28.8px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Make the text cell fill the card */
+.cards-resource > ul > li > div.cards-resource-card-body:last-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* Hide the empty image cell */
+.cards-resource > ul > li > div.cards-resource-card-body:first-child:empty {
+  display: none;
+}
+
+/* Title — GT Sectra Book, 60px */
+.cards-resource h3 {
+  margin: 0 0 0 -3px;
+  color: var(--card-fg);
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.cards-resource h3 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Description */
+.cards-resource p {
+  margin: 20px 0 0;
+  color: var(--card-fg);
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+/* CTA line ("Learn more" / "Let's go") — bold, pushed to bottom-left */
+.cards-resource p:last-child {
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--card-fg);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.125;
+  letter-spacing: 0.48px;
+}
+
+/* Arrow affordance — bottom-right, colored to match the card foreground */
+.cards-resource > ul > li::after {
+  content: '';
+  position: absolute;
+  right: 28.8px;
+  bottom: 28.8px;
+  width: 64px;
+  height: 32px;
+  background-color: var(--card-fg);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'%3E%3Cpath d='M0 16H61M47 3L62 16L47 29' fill='none' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* Per-card colors (order: maroon, red, pale-pink) */
+.cards-resource > ul > li:nth-child(1) {
+  background-color: var(--cooley-maroon);
+
+  --card-fg: var(--cooley-red);
+}
+
+.cards-resource > ul > li:nth-child(2) {
+  background-color: var(--cooley-red);
+
+  --card-fg: var(--cooley-maroon);
+}
+
+.cards-resource > ul > li:nth-child(3) {
+  background-color: var(--cooley-pale-pink);
+
+  --card-fg: var(--cooley-red);
+}
+
+/* Card 3 description uses the eyebrow red in source */
+.cards-resource > ul > li:nth-child(3) p {
+  color: var(--cooley-red-eyebrow);
+}
+
+.cards-resource > ul > li:nth-child(3) h3,
+.cards-resource > ul > li:nth-child(3) p:last-child {
+  color: var(--cooley-red);
+}
+
+@media (width >= 900px) {
+  .cards-resource > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cards-resource h3 {
+    font-size: 60px;
+  }
+}

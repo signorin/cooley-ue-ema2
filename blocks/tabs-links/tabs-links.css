@@ -1,0 +1,132 @@
+/* Cooley "Key Services" tabbed link list
+   Values extracted from https://www.cooley.com/ .tabbed-link-list */
+
+.tabs-links {
+  --tabs-links-red: var(--cooley-red);          /* #fd1434 links + divider */
+  --tabs-links-eyebrow-red: var(--cooley-red-eyebrow); /* #de0220 tab labels */
+}
+
+/* ---- Tab bar ---- */
+.tabs-links .tabs-links-list {
+  display: flex;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--tabs-links-red);
+}
+
+.tabs-links .tabs-links-list button.tabs-links-tab {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 24px;
+  background-color: transparent;
+  color: var(--tabs-links-eyebrow-red);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tabs-links .tabs-links-list button.tabs-links-tab p {
+  margin: 0;
+}
+
+.tabs-links .tabs-links-list button.tabs-links-tab[aria-selected='true'] {
+  background-color: var(--cooley-pale-pink);
+  cursor: default;
+}
+
+.tabs-links .tabs-links-list button.tabs-links-tab:hover {
+  background-color: var(--cooley-pale-pink);
+  color: var(--tabs-links-eyebrow-red);
+}
+
+/* ---- Panels ---- */
+.tabs-links .tabs-links-panel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+}
+
+.tabs-links .tabs-links-panel[aria-hidden='true'] {
+  display: none;
+}
+
+.tabs-links .tabs-links-panel > div {
+  margin: 0;
+}
+
+.tabs-links .tabs-links-panel ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each link row */
+.tabs-links .tabs-links-panel li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--tabs-links-red);
+}
+
+.tabs-links .tabs-links-panel li:first-child {
+  border-top: 0;
+}
+
+/* Right-arrow affordance */
+.tabs-links .tabs-links-panel li::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  background-color: var(--tabs-links-eyebrow-red);
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="black" stroke-width="1.5" d="M4 12h15M13 6l6 6-6 6"/></svg>') no-repeat center / contain;
+}
+
+.tabs-links .tabs-links-panel li h3 {
+  margin: 0;
+  color: var(--tabs-links-red);
+  font-family: var(--heading-font-family);
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.tabs-links .tabs-links-panel li h3 a:any-link {
+  color: var(--tabs-links-red);
+  text-decoration: none;
+}
+
+.tabs-links .tabs-links-panel li h3 a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .tabs-links .tabs-links-panel li {
+    padding: 24px 0;
+  }
+
+  .tabs-links .tabs-links-panel li h3 {
+    font-size: 48px;
+    letter-spacing: -0.48px;
+  }
+}

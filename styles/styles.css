@@ -286,3 +286,38 @@ main .section.grey {
   padding: 80px 0;
   background-color: #f4f0f1;
 }
+
+/* eyebrow — small bold uppercase red label with a vertical-line accent
+   (section labels: "Firm News", "Resources", "Latest insights", "Key Services") */
+main .section.cards-news-container .default-content-wrapper p,
+main .section.cards-resource-container .default-content-wrapper h2,
+main .section.cards-insights-container .default-content-wrapper h2,
+main .section.tabs-links-container .default-content-wrapper h2 {
+  display: flex;
+  align-items: center;
+  margin: 0 0 8px;
+  color: var(--cooley-red-eyebrow);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+}
+
+/* brighter red on the dark "Latest insights" section for contrast */
+main .section.dark.cards-insights-container .default-content-wrapper h2 {
+  color: var(--cooley-red);
+}
+
+main .section.cards-news-container .default-content-wrapper p::before,
+main .section.cards-resource-container .default-content-wrapper h2::before,
+main .section.cards-insights-container .default-content-wrapper h2::before,
+main .section.tabs-links-container .default-content-wrapper h2::before {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 18px;
+  margin-right: 12px;
+  background-color: currentcolor;
+}

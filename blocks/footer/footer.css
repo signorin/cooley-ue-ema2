@@ -1,20 +1,195 @@
+/* Cooley footer — red CTA band + dark maroon main footer */
+
 footer {
-  background-color: var(--light-color);
+  background-color: var(--cooley-maroon-footer);
+  font-family: var(--body-font-family);
   font-size: var(--body-font-size-xs);
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
-}
-
-footer .footer p {
+.cooley-footer p {
   margin: 0;
 }
 
+/* --- top: red CTA band --- */
+.cooley-footer .footer-top {
+  background-color: var(--cooley-red);
+}
+
+.cooley-footer .footer-top-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.cooley-footer .footer-top-inner h2 {
+  margin: 0;
+  color: var(--cooley-maroon);
+  font-family: var(--heading-font-family);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.cooley-footer .footer-top-inner a.button {
+  background-color: var(--cooley-maroon);
+  border-color: var(--cooley-maroon);
+  color: #fff;
+}
+
+.cooley-footer .footer-top-inner a.button:hover {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--cooley-maroon);
+}
+
+/* --- bottom: dark maroon main footer --- */
+.cooley-footer .footer-bottom {
+  background-color: var(--cooley-maroon-footer);
+  color: var(--cooley-pale-pink);
+}
+
+.cooley-footer .footer-bottom-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 48px 40px;
+}
+
+.cooley-footer .footer-logo a {
+  display: block;
+  width: 130px;
+  height: 44px;
+  background-color: var(--cooley-pale-pink);
+  mask: url('/content/images/cooley-logo.svg') no-repeat center / contain;
+}
+
+.cooley-footer .footer-logo img {
+  display: none;
+}
+
+/* nav link list */
+.cooley-footer .footer-nav ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cooley-footer .footer-nav a:any-link {
+  color: var(--cooley-pale-pink);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.cooley-footer .footer-nav a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* payments portal */
+.cooley-footer .footer-portal h2 {
+  margin: 0 0 12px;
+  color: var(--cooley-pale-pink);
+  font-family: var(--heading-font-family-regular);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.cooley-footer .footer-portal p {
+  margin: 0 0 12px;
+  color: var(--cooley-pale-pink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cooley-footer .footer-portal a:any-link {
+  color: var(--cooley-pale-pink);
+}
+
+.cooley-footer .footer-portal a.button.secondary {
+  display: inline-block;
+  margin-top: 8px;
+  background-color: transparent;
+  border-color: var(--cooley-pale-pink);
+  color: var(--cooley-pale-pink);
+  text-decoration: none;
+}
+
+.cooley-footer .footer-portal a.button.secondary:hover {
+  background-color: var(--cooley-pale-pink);
+  color: var(--cooley-maroon-footer);
+}
+
+/* final row: social + legal */
+.cooley-footer .footer-final {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-top: 1px solid rgb(255 242 244 / 20%);
+  padding-top: 24px;
+}
+
+.cooley-footer .footer-social ul {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cooley-footer .footer-social a:any-link {
+  display: block;
+  width: 22px;
+  height: 22px;
+  color: var(--cooley-pale-pink);
+}
+
+.cooley-footer .footer-social a:hover {
+  color: #fff;
+}
+
+.cooley-footer .footer-social img {
+  width: 100%;
+  height: 100%;
+}
+
+.cooley-footer .footer-legal p {
+  margin: 0 0 6px;
+  color: var(--cooley-pale-pink);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  .cooley-footer .footer-bottom-inner {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'logo nav portal'
+      'final final final';
+    gap: 48px;
+  }
+
+  .cooley-footer .footer-logo { grid-area: logo; }
+  .cooley-footer .footer-nav { grid-area: nav; }
+
+  .cooley-footer .footer-portal {
+    grid-area: portal;
+    max-width: 360px;
+  }
+
+  .cooley-footer .footer-final {
+    grid-area: final;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }

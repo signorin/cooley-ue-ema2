@@ -247,7 +247,10 @@ var CustomImportScript = (() => {
         "#onetrust-banner-sdk",
         "#onetrust-pc-sdk",
         "#ot-fltr-modal",
-        ".onetrust-pc-dark-filter"
+        ".onetrust-pc-dark-filter",
+        // Accessibility skip link — non-authorable, EDS provides its own
+        "a.skiplink",
+        'a[href="#main"]'
       ]);
     }
     if (hookName === TransformHook.afterTransform) {

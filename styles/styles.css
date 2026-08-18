@@ -280,6 +280,21 @@ main .section.dark a:any-link {
   color: #fff;
 }
 
+/* "View all" button on the dark insights section — red fill, maroon text
+   (source uses the inverse of the default maroon pill for contrast) */
+main .section.dark a.button:any-link {
+  background-color: var(--cooley-red);
+  border-color: var(--cooley-red);
+  color: var(--cooley-maroon);
+}
+
+main .section.dark a.button:hover,
+main .section.dark a.button:focus {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--cooley-maroon);
+}
+
 /* grey / light-neutral section (e.g. Key Services) */
 main .section.grey {
   margin: 0;

@@ -7,8 +7,29 @@
  * Simple 1-column block: row per unique field (image, text). imageAlt collapses into the <img> alt attribute.
  */
 export default function parse(element, { document }) {
-  // --- Image (field:image) ---
-  // Prefer the first real slot image; fall back to any picture/img inside the hero.
+  // --- Images (field:image) ---
+  // Collect all decorative hero tiles: each .slot holds either an <img>
+  // (picture) or a <video> with a poster frame. Represent every tile as an
+  // <img> so all 5 scattered tiles survive into the content.
+  const tileImgs = [];
+  const slots = element.querySelectorAll('.slots .slot, .js-hero-home-slots .slot');
+  slots.forEach((slot) => {
+    const slotImg = slot.querySelector('img');
+    const slotVideo = slot.querySelector('video');
+    if (slotImg && slotImg.getAttribute('src')) {
+      const im = document.createElement('img');
+      im.setAttribute('src', slotImg.getAttribute('src'));
+      im.setAttribute('alt', slotImg.getAttribute('alt') || '');
+      tileImgs.push(im);
+    } else if (slotVideo && slotVideo.getAttribute('poster')) {
+      // Use the video's poster frame as a still image tile.
+      const im = document.createElement('img');
+      im.setAttribute('src', slotVideo.getAttribute('poster'));
+      im.setAttribute('alt', '');
+      tileImgs.push(im);
+    }
+  });
+  // Fallback: any single picture/img inside the hero if no slots matched.
   const picture = element.querySelector('.slots picture, picture');
   const img = element.querySelector('.slots img, img');
 
@@ -18,15 +39,24 @@ export default function parse(element, { document }) {
   const cta = element.querySelector('button.js-video-toggle, .btn--video-toggle, a.btn, .inner a');
 
   // Empty-block guard
-  if (!heading && !picture && !img) {
+  if (!heading && !picture && !img && tileImgs.length === 0) {
     element.replaceWith(...element.childNodes);
     return;
   }
 
   const cells = [];
 
-  // Row: image
-  if (picture || img) {
+  // Row: images (all scattered tiles; fall back to a single picture/img)
+  if (tileImgs.length > 0) {
+    const imageFrag = document.createDocumentFragment();
+    imageFrag.appendChild(document.createComment(' field:image '));
+    tileImgs.forEach((im) => {
+      const p = document.createElement('p');
+      p.appendChild(im);
+      imageFrag.appendChild(p);
+    });
+    cells.push([imageFrag]);
+  } else if (picture || img) {
     const imageFrag = document.createDocumentFragment();
     imageFrag.appendChild(document.createComment(' field:image '));
     imageFrag.appendChild(picture || img);

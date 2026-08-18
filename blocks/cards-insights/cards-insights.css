@@ -13,12 +13,12 @@
 
 .cards-insights > ul > li {
   background-color: transparent;
-  border-top: 1px solid rgb(253 20 52 / 45%);
+  border-top: 1px solid var(--cooley-red);
   padding: 24px 0;
 }
 
 .cards-insights > ul > li:last-child {
-  border-bottom: 1px solid rgb(253 20 52 / 45%);
+  border-bottom: 1px solid var(--cooley-red);
 }
 
 /* hide the empty image cell (may be labelled card-image or, when empty, card-body) */

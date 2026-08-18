@@ -24,13 +24,11 @@
 
 /* ---- row base rules (equal specificity, kept together) ---- */
 
-/* row 1: decorative media tile */
+/* row 1: decorative media tiles — full-canvas layer holding scattered tiles */
 .hero-home.block > div:nth-child(1) {
   position: absolute;
-  top: 8%;
-  left: 0;
+  inset: 0;
   z-index: 1;
-  width: 140px;
   margin: 0;
 }
 
@@ -42,23 +40,59 @@
   text-align: center;
 }
 
-/* ---- decorative media tile descendants (row 1: div > div > p > picture > img) ---- */
-.hero-home.block > div:nth-child(1) > div,
-.hero-home.block > div:nth-child(1) p {
+/* ---- decorative media tiles (row 1: div > p > img, one <p> per tile) ---- */
+.hero-home.block > div:nth-child(1) > div {
   margin: 0;
 }
 
-.hero-home.block > div:nth-child(1) picture {
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
+.hero-home.block > div:nth-child(1) p {
+  position: absolute;
+  width: 96px;
+  margin: 0;
 }
 
 .hero-home.block > div:nth-child(1) img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
+}
+
+/* "Pause video" — small de-emphasized secondary control (row 2).
+   Declared before the tile :nth-of-type scatter rules to keep
+   ascending specificity order. */
+.hero-home.block > div:nth-child(2) p {
+  margin: 20px 0 0;
+  color: var(--cooley-red-eyebrow);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-transform: none;
+  cursor: pointer;
+}
+
+/* scattered constellation — mobile (smaller, kept near edges).
+   inset order: top right bottom left */
+.hero-home.block > div:nth-child(1) p:nth-of-type(1) {
+  inset: 6% auto auto 2%;
+}
+
+.hero-home.block > div:nth-child(1) p:nth-of-type(2) {
+  inset: 4% 4% auto auto;
+}
+
+.hero-home.block > div:nth-child(1) p:nth-of-type(3) {
+  inset: 42% 2% auto auto;
+}
+
+.hero-home.block > div:nth-child(1) p:nth-of-type(4) {
+  inset: auto auto 14% 4%;
+}
+
+.hero-home.block > div:nth-child(1) p:nth-of-type(5) {
+  inset: auto 6% 6% auto;
 }
 
 /* ---- headline row descendants (row 2: div > div > h1 + p) ---- */
@@ -77,19 +111,6 @@
   text-align: center;
 }
 
-/* "Pause video" — small de-emphasized secondary control */
-.hero-home.block > div:nth-child(2) p {
-  margin: 20px 0 0;
-  color: var(--cooley-red-eyebrow);
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  line-height: 1;
-  text-transform: none;
-  cursor: pointer;
-}
-
 /* ---- desktop ---- */
 @media (width >= 900px) {
   .hero-home.block {
@@ -97,13 +118,34 @@
     padding: 0 40px;
   }
 
-  .hero-home.block > div:nth-child(1) {
-    top: 108px;
-    left: 0;
+  .hero-home.block > div:nth-child(2) p {
+    margin-top: 28px;
+  }
+
+  /* desktop scatter — larger tiles in the source constellation.
+     inset order: top right bottom left */
+  .hero-home.block > div:nth-child(1) p {
     width: 180px;
   }
 
-  .hero-home.block > div:nth-child(2) p {
-    margin-top: 28px;
+  .hero-home.block > div:nth-child(1) p:nth-of-type(1) {
+    inset: 14% auto auto 3%;
+  }
+
+  .hero-home.block > div:nth-child(1) p:nth-of-type(2) {
+    inset: 6% 16% auto auto;
+    width: 150px;
+  }
+
+  .hero-home.block > div:nth-child(1) p:nth-of-type(3) {
+    inset: 46% 4% auto auto;
+  }
+
+  .hero-home.block > div:nth-child(1) p:nth-of-type(4) {
+    inset: auto auto 16% 26%;
+  }
+
+  .hero-home.block > div:nth-child(1) p:nth-of-type(5) {
+    inset: auto 10% 4% auto;
   }
 }

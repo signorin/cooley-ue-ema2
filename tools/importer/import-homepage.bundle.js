@@ -43,16 +43,42 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/hero-home.js
   function parse(element, { document: document2 }) {
+    const tileImgs = [];
+    const slots = element.querySelectorAll(".slots .slot, .js-hero-home-slots .slot");
+    slots.forEach((slot) => {
+      const slotImg = slot.querySelector("img");
+      const slotVideo = slot.querySelector("video");
+      if (slotImg && slotImg.getAttribute("src")) {
+        const im = document2.createElement("img");
+        im.setAttribute("src", slotImg.getAttribute("src"));
+        im.setAttribute("alt", slotImg.getAttribute("alt") || "");
+        tileImgs.push(im);
+      } else if (slotVideo && slotVideo.getAttribute("poster")) {
+        const im = document2.createElement("img");
+        im.setAttribute("src", slotVideo.getAttribute("poster"));
+        im.setAttribute("alt", "");
+        tileImgs.push(im);
+      }
+    });
     const picture = element.querySelector(".slots picture, picture");
     const img = element.querySelector(".slots img, img");
     const heading = element.querySelector('h1.title, h1, .inner h1, [class*="title"] , h2');
     const cta = element.querySelector("button.js-video-toggle, .btn--video-toggle, a.btn, .inner a");
-    if (!heading && !picture && !img) {
+    if (!heading && !picture && !img && tileImgs.length === 0) {
       element.replaceWith(...element.childNodes);
       return;
     }
     const cells = [];
-    if (picture || img) {
+    if (tileImgs.length > 0) {
+      const imageFrag = document2.createDocumentFragment();
+      imageFrag.appendChild(document2.createComment(" field:image "));
+      tileImgs.forEach((im) => {
+        const p = document2.createElement("p");
+        p.appendChild(im);
+        imageFrag.appendChild(p);
+      });
+      cells.push([imageFrag]);
+    } else if (picture || img) {
       const imageFrag = document2.createDocumentFragment();
       imageFrag.appendChild(document2.createComment(" field:image "));
       imageFrag.appendChild(picture || img);

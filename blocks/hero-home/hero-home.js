@@ -1,6 +1,3 @@
-/* eslint-disable */
-/* re-sync: force EDS code pipeline to re-ingest this file */
-/* eslint-enable */
 /**
  * Hero Home decoration.
  *
@@ -39,6 +36,22 @@ function decodeEntities(str) {
   return out;
 }
 
+// Rewrite any unservable DAM img src (and <source> srcset in optimized
+// <picture>) to the cooley.com origin, across the whole block.
+function fixDamSources(root) {
+  root.querySelectorAll('img').forEach((im) => {
+    const fixed = resolveSrc(im.getAttribute('src'));
+    if (fixed !== im.getAttribute('src')) im.setAttribute('src', fixed);
+    if (im.getAttribute('srcset')) im.removeAttribute('srcset');
+  });
+  root.querySelectorAll('source').forEach((s) => {
+    // EDS createOptimizedPicture adds <source srcset=...> pointing at the
+    // same (DAM) path; drop them so the corrected <img src> is used.
+    const ss = s.getAttribute('srcset') || '';
+    if (ss.includes(DAM_PREFIX)) s.remove();
+  });
+}
+
 export default function decorate(block) {
   const rows = [...block.children];
   const imageCell = rows[0] ? (rows[0].querySelector(':scope > div') || rows[0]) : null;
@@ -67,11 +80,12 @@ export default function decorate(block) {
         imageCell.appendChild(p);
       }
     }
-  } else if (hasRealImg) {
-    // Real tiles already present — just fix any unservable DAM sources.
-    imageCell.querySelectorAll('img').forEach((im) => {
-      const fixed = resolveSrc(im.getAttribute('src'));
-      if (fixed !== im.getAttribute('src')) im.setAttribute('src', fixed);
-    });
   }
+
+  // Always normalize DAM sources across the whole block, now and again after
+  // the current task cycle (EDS may run createOptimizedPicture after this
+  // decorator and re-introduce DAM paths / add <source> elements).
+  fixDamSources(block);
+  requestAnimationFrame(() => fixDamSources(block));
+  setTimeout(() => fixDamSources(block), 1000);
 }

@@ -1,3 +1,6 @@
+/* eslint-disable */
+/* re-sync: force EDS code pipeline to re-ingest this file */
+/* eslint-enable */
 /**
  * Hero Home decoration.
  *

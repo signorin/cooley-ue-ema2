@@ -6,7 +6,22 @@
  * <img>/<picture> elements OR as (double-)escaped HTML text in the cell
  * (e.g. "&lt;p&gt;&lt;img src=...&gt;"). This decorator normalizes both cases
  * into real <img> elements so the CSS scatter always has tiles to position.
+ *
+ * The tile sources were ingested as AEM DAM references
+ * (/content/dam/cooley-ue-ema2/-/media/...) which Edge Delivery does not serve
+ * (404). The original assets are still served by the source site, so we rewrite
+ * that DAM prefix back to the cooley.com origin, preserving the /-/media/... tail.
  */
+
+const DAM_PREFIX = '/content/dam/cooley-ue-ema2/-/media/';
+const ORIGIN_PREFIX = 'https://www.cooley.com/-/media/';
+
+function resolveSrc(src) {
+  if (src && src.startsWith(DAM_PREFIX)) {
+    return ORIGIN_PREFIX + src.slice(DAM_PREFIX.length);
+  }
+  return src;
+}
 
 function decodeEntities(str) {
   const txt = document.createElement('textarea');
@@ -40,7 +55,7 @@ export default function decorate(block) {
         imgs.forEach((im, i) => {
           if (i > 0) p.appendChild(document.createTextNode(' '));
           const clean = document.createElement('img');
-          clean.setAttribute('src', im.getAttribute('src'));
+          clean.setAttribute('src', resolveSrc(im.getAttribute('src')));
           clean.setAttribute('alt', im.getAttribute('alt') || '');
           clean.setAttribute('loading', 'lazy');
           p.appendChild(clean);
@@ -49,5 +64,11 @@ export default function decorate(block) {
         imageCell.appendChild(p);
       }
     }
+  } else if (hasRealImg) {
+    // Real tiles already present — just fix any unservable DAM sources.
+    imageCell.querySelectorAll('img').forEach((im) => {
+      const fixed = resolveSrc(im.getAttribute('src'));
+      if (fixed !== im.getAttribute('src')) im.setAttribute('src', fixed);
+    });
   }
 }

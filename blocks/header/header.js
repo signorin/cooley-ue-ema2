@@ -28,11 +28,20 @@ function openMenu(nav, overlay, hamburger) {
  * (2) DA / EDS production: `${navPath}.plain.html`
  */
 async function fetchNav(navPath) {
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) {
-    resp = await fetch(`${navPath}.plain.html`);
+  // EDS delivery serves the fragment at /nav.plain.html; local/DA dev may use
+  // /content/nav.plain.html. Try the metadata path, then root, then /content.
+  const candidates = [
+    navPath.endsWith('.plain.html') ? navPath : `${navPath}.plain.html`,
+    '/nav.plain.html',
+    '/content/nav.plain.html',
+  ];
+  let resp;
+  for (let i = 0; i < candidates.length; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    resp = await fetch(candidates[i]);
+    if (resp.ok) break;
   }
-  if (!resp.ok) return null;
+  if (!resp || !resp.ok) return null;
   const html = await resp.text();
   const doc = new DOMParser().parseFromString(html, 'text/html');
   return doc.querySelector('main') || doc.body;
@@ -44,7 +53,7 @@ async function fetchNav(navPath) {
  */
 export default async function decorate(block) {
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/content/nav';
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
 
   const source = await fetchNav(navPath);
   block.textContent = '';

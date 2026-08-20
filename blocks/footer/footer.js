@@ -9,11 +9,20 @@ import { getMetadata } from '../../scripts/aem.js';
  * (2) DA / EDS production: `${footerPath}.plain.html`
  */
 async function fetchFooter(footerPath) {
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) {
-    resp = await fetch(`${footerPath}.plain.html`);
+  // EDS delivery serves the fragment at /footer.plain.html; local/DA dev may use
+  // /content/footer.plain.html. Try the metadata path, then root, then /content.
+  const candidates = [
+    footerPath.endsWith('.plain.html') ? footerPath : `${footerPath}.plain.html`,
+    '/footer.plain.html',
+    '/content/footer.plain.html',
+  ];
+  let resp;
+  for (let i = 0; i < candidates.length; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    resp = await fetch(candidates[i]);
+    if (resp.ok) break;
   }
-  if (!resp.ok) return null;
+  if (!resp || !resp.ok) return null;
   const html = await resp.text();
   const doc = new DOMParser().parseFromString(html, 'text/html');
   return doc.querySelector('main') || doc.body;
@@ -25,7 +34,7 @@ async function fetchFooter(footerPath) {
  */
 export default async function decorate(block) {
   const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/content/footer';
+  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
 
   const source = await fetchFooter(footerPath);
   block.textContent = '';
